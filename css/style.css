@@ -5,8 +5,8 @@ body {
   padding: 1em;
   cursor: help;
 }
-body.disabled { cursor: not-allowed; }
-body.done { cursor: auto; }
+body.time   { cursor: not-allowed; }
+body.wakeup { cursor: auto;        }
 
 pre { overflow: visible; }
 
@@ -15,18 +15,18 @@ pre { overflow: visible; }
 
 #thing1,
 #thing2,
-#downthehole { display: none; }
+#handshake { display: none; }
 
-#question {
+#won {
   color: #33dd33;
   margin-top: 10vh;
 }
 
-#answer {
+#notoriety {
   color: #66ee66;
   margin-bottom: 15vh;
 }
-#answer.cr {
+#notoriety.cr {
   animation: carriage-return 1s steps(3) 1 forwards;
 }
 @keyframes carriage-return {
@@ -35,20 +35,24 @@ pre { overflow: visible; }
   }
 }
 
-#box {
+#like-a {
   margin-left: 10vw;
   margin-top: 15hv;
   position: relative;
 }
-#box pre { position: absolute; }
-#breadcrumb {}
-#downthehole {}
-#thecall {
+#like-a pre { position: absolute; }
+#SECRET {}
+#handshake {}
+#redpill {
   color: white;
   opacity: 0;
-  transition: opacity 3s ease-in-out 0;
 }
-.done #thecall { opacity: 1; }
+.wakeup #redpill { 
+  animation: wakeup 3s steps(5, start) 1; /* forwards + delay*/
+}
+@keyframes wakeup {
+  to { opacity: 1; }
+}
 
 .cursor {
   animation: blink 1s steps(5, start) infinite; 

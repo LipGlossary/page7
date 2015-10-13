@@ -20,7 +20,7 @@ function type (timeStamp) {
       mode = 2;
       window.requestAnimationFrame(type);
     } else {
-      $('#question').append(cursor);
+      $('#won').append(cursor);
       start = timeStamp;
       window.requestAnimationFrame(waitForQuestion);
     }
@@ -32,7 +32,8 @@ var fps = 10;
 var interval = 1000 / fps;
 var delta, text, word;
 
-var q = 'How does one rejoin a meta-Cornell box made by a person who (at least occasionally) designs puzzles for adventure games?';
+var q = 'Q: How does one rejoin a meta-Cornell box made by a person who (at '
+      + 'least occasionally) designs puzzles for adventure games?';
 function waitForQuestion (timeStamp) {
   if (timeStamp - start < 4000) window.requestAnimationFrame(waitForQuestion);
   else window.requestAnimationFrame(question);
@@ -41,9 +42,9 @@ function question (timeStamp) {
   delta = timeStamp - start;
   if (delta > interval) {
     if (q.length > 0) {
-      text = $('#question').text();
+      text = $('#won').text();
       word = Math.floor(Math.random() * 5);
-      $('#question')
+      $('#won')
       .text(text + q.substring(0, word))
       .append(cursor);
       q = q.substring(word);
@@ -52,11 +53,11 @@ function question (timeStamp) {
     else {
       $('body').on('click', function () {
         $(this).off('click');
-        $(this).addClass('disabled');
+        $(this).addClass('time');
         start = performance.now();
         window.requestAnimationFrame(waitForAnswer);
       });
-      $('body').removeClass('disabled');
+      $('body').removeClass('time');
       return;
     }
   }
@@ -67,12 +68,12 @@ var cursorAdvance = true;
 function waitForAnswer(timeStamp) {
   if(cursorAdvance) {
     $('.cursor').remove();
-    $('#answer').append(cursor);
-    $('#answer').addClass('cr');
+    $('#notoriety').append(cursor);
+    $('#notoriety').addClass('cr');
     cursorAdvance = false;
     window.requestAnimationFrame(waitForAnswer);
-  }
-  else if (timeStamp - start < 3000) window.requestAnimationFrame(waitForAnswer);
+  } else if (timeStamp - start < 3000)
+    window.requestAnimationFrame(waitForAnswer);
   else window.requestAnimationFrame(answer);
 }
 var a = 'A glimpse into the heart of something unfamiliar...';
@@ -80,9 +81,9 @@ function answer (timeStamp) {
   delta = timeStamp - start;
   if (delta > interval) {
     if (a.length > 0) {
-      text = $('#answer').text();
+      text = $('#notoriety').text();
       word = Math.floor(Math.random() * 5);
-      $('#answer')
+      $('#notoriety')
       .text(text + a.substring(0, word))
       .append(cursor);
       a = a.substring(word);
@@ -100,23 +101,19 @@ function waitForBreadcrumb (timeStamp) {
   if (timeStamp - start < 3000) window.requestAnimationFrame(waitForBreadcrumb);
   else {
     $('.cursor').remove();
-    $('#breadcrumb').append(cursor);
+    $('#SECRET').append(cursor);
     speed /= 4;
     window.requestAnimationFrame(breadcrumb);
   }
 }
-
 function breadcrumb (timeStamp) {
-  atBat = $('#breadcrumb').text();
-  onDeck = $('#downthehole').text();
+  atBat = $('#SECRET').text();
+  onDeck = $('#handshake').text();
   if (onDeck.length > 0) {
-    $('#breadcrumb')
+    $('#SECRET')
     .text(atBat + onDeck.substring(0, speed))
     .append(cursor);
-    $('#downthehole').text(onDeck.substring(speed));
+    $('#handshake').text(onDeck.substring(speed));
     window.requestAnimationFrame(breadcrumb);
-  } else {
-    $('body').addClass('done');
-    return;
-  }
+  } else $('body').addClass('wakeup');
 }
