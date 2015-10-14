@@ -32,8 +32,9 @@ var fps = 10;
 var interval = 1000 / fps;
 var delta, text, word;
 
-var q = 'Q: How does one rejoin a meta-Cornell box made by a person who (at '
-      + 'least occasionally) designs puzzles for adventure games?';
+var q = 'Q: How does one rejoin a meta-Cornell box made by a person '
+      + 'who\n       (at least occasionally)\n   designs puzzles for adventure '
+      + 'games?';
 function waitForQuestion (timeStamp) {
   if (timeStamp - start < 4000) window.requestAnimationFrame(waitForQuestion);
   else window.requestAnimationFrame(question);

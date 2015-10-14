@@ -48,7 +48,7 @@ pre { overflow: visible; }
   opacity: 0;
 }
 .wakeup #redpill { 
-  animation: wakeup 3s steps(5, start) 1; /* forwards + delay*/
+  animation: wakeup 3s steps(5, start) 1 forwards;
 }
 @keyframes wakeup {
   to { opacity: 1; }
